@@ -1,17 +1,44 @@
 {
-  "name": "warcraft-3-ui-library",
+  "name": "warcraft-3-ui",
+  "description": "",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
-  "scripts": {},
-  "workspaces": [
-    "packages/*"
+  "keywords": [],
+  "author": "Lucifurry",
+  "license": "ISC",
+  "files": [
+    "dist"
   ],
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && vue-tsc --emitDeclarationOnly",
+    "storybook": "start-storybook -p 6006"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
   "devDependencies": {
+    "@storybook/addon-essentials": "^6.5.12",
+    "@storybook/addon-interactions": "^6.5.12",
+    "@storybook/addon-links": "^6.5.12",
+    "@storybook/builder-vite": "^0.2.2",
+    "@storybook/cli": "^6.5.12",
+    "@storybook/testing-library": "^0.0.13",
+    "@storybook/vue3": "^6.5.12",
     "@types/node": "^18.7.23",
     "@vitejs/plugin-vue": "^3.1.0",
     "typescript": "^4.6.4",
     "vite": "^3.1.0",
+    "vue": "^3.2.39",
     "vue-tsc": "^0.40.4"
   }
 }

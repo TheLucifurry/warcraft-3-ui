@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <input placeholder="Frehrh"/>
+  <button placeholder="Frehrh"/>
 </template>
 
 <style lang="scss"></style>
