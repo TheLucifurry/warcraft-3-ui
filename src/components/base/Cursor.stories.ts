@@ -28,21 +28,21 @@ const Template = (args: any) => ({
     return { args, state };
   },
   template: `
-      <ConfigProvider :theme="args.raceTheme">
-        <div style="display: flex; text-align: center; color: cyan; font-family: arial; flex-wrap: wrap; width: 100%;height: 100%">
-          <Cursor :state="state" :color="args.color"/>
-          ${states
+    <ConfigProvider :theme="args.raceTheme">
+      <div style="display: flex; text-align: center; color: cyan; font-family: arial; flex-wrap: wrap; width: 100%;height: 100%">
+        <Cursor :state="state" :color="args.color"/>
+        ${states
       .map((s) => `
-        <div
-          @mouseenter="state = '${s}'"
-          style="margin: 4px; padding:32px; border-radius: 8px; background: #00ffff11"
-        >
-          ${s}
-        </div>
-      `)
+            <div
+              @mouseenter="state = '${s}'"
+              style="margin: 4px; padding:32px; border-radius: 8px; background: #00ffff11"
+            >
+              ${s}
+            </div>
+          `)
       .join('')}
-        </div>
-      </ConfigProvider>
+      </div>
+    </ConfigProvider>
   `,
 });
 

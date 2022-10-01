@@ -3,7 +3,6 @@ import { computed, getCurrentInstance, onMounted, onUnmounted, PropType, ref } f
 import { useConfig } from '../ConfigProvider';
 import { RACE_KEY } from '../../consts';
 
-RACE_KEY
 type CursorState =
   | 'default'
   | 'default-active'
