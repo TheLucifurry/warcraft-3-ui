@@ -61,7 +61,6 @@ onUnmounted(()=>{
 
 <template>
   <div ref="cursorEl" class="cursor__container">
-  {{theme}}
     <div :class="`cursor cursor--${props.state}`" />
   </div>
 </template>

@@ -8,6 +8,19 @@ export default {
   component: Cursor,
 };
 
+const states = [
+  'default',
+  'default-active',
+  'pointer',
+  'pointer-active',
+  'pointer-denied',
+  'hold',
+  'arrow-top',
+  'arrow-right',
+  'arrow-bottom',
+  'arrow-left',
+];
+
 const Template = (args: any) => ({
   components: { Cursor, ConfigProvider },
   setup() {
@@ -16,27 +29,18 @@ const Template = (args: any) => ({
   },
   template: `
       <ConfigProvider :theme="args.raceTheme">
-        <div style="display: flex; text-align: center; flex-wrap: wrap; width: 760px">
+        <div style="display: flex; text-align: center; color: cyan; font-family: arial; flex-wrap: wrap; width: 100%;height: 100%">
           <Cursor :state="state" :color="args.color"/>
-          ${[
-      'default',
-      'default-active',
-      'pointer',
-      'pointer-active',
-      'pointer-denied',
-      'hold',
-      'arrow-top',
-      'arrow-right',
-      'arrow-bottom',
-      'arrow-left',
-    ]
+          ${states
       .map((s) => `
-                    <div @mouseenter="state = '${s}'" style="height: 150px; width: 150px; border: 1px solid gray">
-                      ${s}
-                    </div>
-                  `)
-      .join('')
-    }
+        <div
+          @mouseenter="state = '${s}'"
+          style="margin: 4px; padding:32px; border-radius: 8px; background: #00ffff11"
+        >
+          ${s}
+        </div>
+      `)
+      .join('')}
         </div>
       </ConfigProvider>
   `,
