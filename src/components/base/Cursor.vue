@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { getCurrentInstance, onMounted, onUnmounted, PropType, ref } from 'vue';
+import { computed, getCurrentInstance, onMounted, onUnmounted, PropType, ref } from 'vue';
+import { useConfig } from '../ConfigProvider';
 
 type CursorState =
   | 'default'
@@ -24,15 +25,23 @@ const props = defineProps({
   // }
 });
 
+const {theme} = useConfig();
 const cursorEl = ref<HTMLElement | null>(null);
 const cursorPlaceEl = ref<HTMLElement | null>(null);
+const spriteUrl = computed(() => `url(${resolvedPath(`../../assets/${theme}/cursor.png`)}`);
+
+function resolvedPath(path: string) {
+  return new URL(path, import.meta.url).href
+}
+
 function moveCursor(e: MouseEvent) {
   if(!cursorEl.value) return;
   cursorEl.value.style.transform = `translate(${e.pageX}px, ${e.pageY}px)`;
 }
 
+
 onMounted(() => {
-  cursorPlaceEl.value = getCurrentInstance()?.parent?.proxy?.$el;
+  cursorPlaceEl.value = getCurrentInstance()?.proxy?.$el.parentElement;
   if(!cursorPlaceEl?.value) {
     throw new Error('[warcraft-3-ui]: Cursor - element from "to" prop not found or something went wrong')
   }
@@ -50,6 +59,7 @@ onUnmounted(()=>{
 
 <template>
   <div ref="cursorEl" class="cursor__container">
+  {{theme}}
     <div :class="`cursor cursor--${props.state}`" />
   </div>
 </template>
@@ -61,7 +71,7 @@ $tile-size: 32px;
   position: relative;
   width: $tile-size;
   height: $tile-size;
-  background: url('../../assets/und/cursor.png') no-repeat;
+  background: v-bind(spriteUrl) no-repeat;
   // mix-blend-mode: color;
   // border: 1px solid orange;
 
@@ -87,7 +97,7 @@ $tile-size: 32px;
     background-position: (-$tile-size * 2) (-$tile-size * 3);
   }
   &--hold {
-    background-position: (-$tile-size * 3) (-$tile-size * 3);
+    background-position: (-$tile-size * 4) (-$tile-size * 3);
   }
   &--arrow-top {
     animation: cursor-arrow 100ms steps(3) infinite;

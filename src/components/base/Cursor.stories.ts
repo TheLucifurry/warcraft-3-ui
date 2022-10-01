@@ -1,24 +1,24 @@
 import { ref } from 'vue';
 import Cursor from './Cursor.vue';
+import ConfigProvider from '../ConfigProvider';
+import { RACE_KEY } from '../../consts';
 
 export default {
   title: 'Basic/Cursor',
   component: Cursor,
-  // argTypes: {
-  //   type: { type: 'select' }
-  // },
 };
 
-const Template = (args) => ({
-  components: { Cursor },
+const Template = (args: any) => ({
+  components: { Cursor, ConfigProvider },
   setup() {
     const state = ref('default');
     return { args, state };
   },
   template: `
-    <div style="display: flex; text-align: center; flex-wrap: wrap; width: 760px">
-      <Cursor :state="state" :color="args.color"/>
-      ${[
+      <ConfigProvider :theme="args.raceTheme">
+        <div style="display: flex; text-align: center; flex-wrap: wrap; width: 760px">
+          <Cursor :state="state" :color="args.color"/>
+          ${[
       'default',
       'default-active',
       'pointer',
@@ -31,18 +31,25 @@ const Template = (args) => ({
       'arrow-left',
     ]
       .map((s) => `
-            <div @mouseenter="state = '${s}'" style="height: 150px; width: 150px; border: 1px solid gray">
-              ${s}
-            </div>
-          `)
+                    <div @mouseenter="state = '${s}'" style="height: 150px; width: 150px; border: 1px solid gray">
+                      ${s}
+                    </div>
+                  `)
       .join('')
     }
-    </div>
+        </div>
+      </ConfigProvider>
   `,
 });
 
-export const Primary = Template.bind({});
-// More on args: https://storybook.js.org/docs/vue/writing-stories/args
-// Primary.args = {
-//   // type: 'number',
-// };
+export const Human = Template.bind({});
+Human.args = { raceTheme: RACE_KEY.HUMAN };
+
+export const NightElf = Template.bind({});
+NightElf.args = { raceTheme: RACE_KEY.NIGHT_ELF };
+
+export const Orc = Template.bind({});
+Orc.args = { raceTheme: RACE_KEY.ORC };
+
+export const Undead = Template.bind({});
+Undead.args = { raceTheme: RACE_KEY.UNDEAD };
