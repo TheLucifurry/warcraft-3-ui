@@ -2,21 +2,12 @@ const { mergeConfig } = require('vite');
 
 const PATH_BASE = '/warcraft-3-ui/';
 
-module.exports = {
-  async viteFinal(config, { configType }) {
-    if (configType === 'PRODUCTION') {
-      // config.base = PATH_BASE;
-      config.base = './';
-    }
+const changeBasePath = config => {
+  config.output.publicPath = PATH_BASE
+  return config
+}
 
-    // return the customized config
-    return mergeConfig(config, {
-      // customize the Vite config here
-      resolve: {
-        alias: { foo: 'bar' },
-      },
-    });
-  },
+module.exports = {
   "stories": [
     `${__dirname}/../src/**/*.stories.mdx`,
     `${__dirname}/../src/**/*.stories.@(js|jsx|ts|tsx)`
@@ -33,5 +24,16 @@ module.exports = {
   },
   "features": {
     "storyStoreV7": true
-  }
+  },
+
+  async viteFinal(config) {
+    return mergeConfig(config, {
+      resolve: {
+        alias: { foo: 'bar' },
+      },
+    });
+  },
+
+  webpackFinal: changeBasePath,
+  managerWebpack: changeBasePath,
 }
