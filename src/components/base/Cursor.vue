@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, getCurrentInstance, onMounted, onUnmounted, PropType, ref } from 'vue';
 import { useConfig } from '../ConfigProvider';
-import { RACE_KEY } from '../../consts';
 
 type CursorState =
   | 'default'
@@ -29,7 +28,7 @@ const props = defineProps({
 const {theme} = useConfig();
 const cursorEl = ref<HTMLElement | null>(null);
 const cursorPlaceEl = ref<HTMLElement | null>(null);
-const spriteUrl = computed(() => `url(${resolvedPath(`../../assets/${theme || RACE_KEY.HUMAN}/cursor.png`)}`);
+const spriteUrl = computed(() => `url(${resolvedPath(`../../assets/${theme}/cursor.png`)}`);
 
 function resolvedPath(path: string) {
   return new URL(path, import.meta.url).href
@@ -48,12 +47,13 @@ onMounted(() => {
   }
 
   cursorPlaceEl.value.addEventListener('mousemove', moveCursor);
-  cursorPlaceEl.value.style.cursor = 'none'
+  cursorPlaceEl.value.classList.add('cursored');
 })
 
 onUnmounted(()=>{
   if(cursorPlaceEl.value){
     cursorPlaceEl.value.removeEventListener('mousemove', moveCursor);
+    cursorPlaceEl.value.classList.remove('cursored');
   }
 })
 </script>
@@ -67,6 +67,12 @@ onUnmounted(()=>{
 <style lang="scss">
 $tile-size: 32px;
 
+.cursored{
+  cursor: none;
+  & * {
+    cursor: none;
+  }
+}
 .cursor {
   position: relative;
   width: $tile-size;
