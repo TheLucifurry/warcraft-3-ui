@@ -33,7 +33,9 @@ export default defineComponent({
 });
 
 export function useConfig(): IConfigAPI {
-  const { theme } = inject(injectKey) as InternalAPI;
+  const { theme } = inject(injectKey) as InternalAPI || {
+    theme: RACE_KEY.HUMAN
+  };
 
   return {
     theme,
