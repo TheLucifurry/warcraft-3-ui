@@ -31,9 +31,12 @@ module.exports = {
     debugger
 
     return mergeConfig(config, {
-      resolve: {
-        alias: { '/assets/': PATH_BASE },
-      },
+      // resolve: {
+      //   alias: {
+      //     '/assets/': PATH_BASE
+      //   },
+      // },
+      publicDir: PATH_BASE,
       optimizeDeps: {
         include: ['storybook-dark-mode'],
       },
