@@ -28,8 +28,12 @@ module.exports = {
     if (configType === 'PRODUCTION') {
       config.base = PATH_BASE;
     }
+    debugger
 
     return mergeConfig(config, {
+      resolve: {
+        alias: { '/assets/': PATH_BASE },
+      },
       optimizeDeps: {
         include: ['storybook-dark-mode'],
       },
