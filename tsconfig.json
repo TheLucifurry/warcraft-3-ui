@@ -15,7 +15,10 @@
 
     // Custom
     "outDir": "dist",
-    "declaration": true
+    "declaration": true,
+    "types": [
+      "vite/client", // if using vite
+    ]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
