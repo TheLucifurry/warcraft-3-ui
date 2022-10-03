@@ -21,7 +21,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && vue-tsc --emitDeclarationOnly",
-    "storybook": "start-storybook -p 6006"
+    "storybook": "start-storybook -p 6006",
+    "storybook-build": "build-storybook -o docs -s ./src/assets",
+    "preview": "pnpx http-server ./docs"
   },
   "peerDependencies": {
     "vue": "^3.2.0"
