@@ -34,6 +34,18 @@ module.exports = {
     });
   },
 
-  webpackFinal: changeBasePath,
-  managerWebpack: changeBasePath,
+  // webpackFinal: changeBasePath,
+  // managerWebpack: changeBasePath,
+  webpackFinal: async (config, { configType }) => {
+    if (configType === 'PRODUCTION') {
+      config.output.publicPath = PATH_BASE;
+    }
+    return config;
+  },
+  managerWebpack: async (config, { configType }) => {
+    if (configType === 'PRODUCTION') {
+      config.output.publicPath = PATH_BASE;
+    }
+    return config;
+  },
 }

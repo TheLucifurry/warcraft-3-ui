@@ -1,3 +1,8 @@
+<link id="favicon" rel="shortcut icon" type="image/x-icon" href="/warcraft-3-ui/favicon.ico" />
 <script>
-  window['PREVIEW_URL'] = '/warcraft-3-ui/iframe.html'
+  if ('%NODE_ENV%' === 'production') {
+    window['PREVIEW_URL'] = '/warcraft-3-ui/iframe.html';
+  } else {
+    document.getElementById('favicon').setAttribute('href', '/favicon.ico');
+  }
 </script>
