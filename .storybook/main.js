@@ -5,7 +5,8 @@ const PATH_BASE = '/warcraft-3-ui/';
 module.exports = {
   async viteFinal(config, { configType }) {
     if (configType === 'PRODUCTION') {
-      config.base = PATH_BASE;
+      // config.base = PATH_BASE;
+      config.base = './';
     }
 
     // return the customized config
