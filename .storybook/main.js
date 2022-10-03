@@ -1,7 +1,13 @@
 const { mergeConfig } = require('vite');
 
+const PATH_BASE = '/warcraft-3-ui/';
+
 module.exports = {
   async viteFinal(config, { configType }) {
+    if (configType === 'PRODUCTION') {
+      config.base = PATH_BASE;
+    }
+
     // return the customized config
     return mergeConfig(config, {
       // customize the Vite config here
