@@ -22,7 +22,7 @@
     "dev": "vite",
     "build": "vite build && vue-tsc --emitDeclarationOnly",
     "storybook": "start-storybook -p 6006",
-    "storybook-build": "build-storybook -o docs -s ./src/assets",
+    "storybook-build": "build-storybook -o docs",
     "preview": "pnpx http-server ./docs"
   },
   "peerDependencies": {
