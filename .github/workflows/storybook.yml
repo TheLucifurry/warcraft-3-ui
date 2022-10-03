@@ -12,7 +12,8 @@ jobs:
 
       - name: Install and Build
         run: |
-          npm ci
+          npm i -g pnpm
+          pnpm i
           npm run storybook-build
 
       - name: Deploy
