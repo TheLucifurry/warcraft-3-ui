@@ -24,6 +24,7 @@ module.exports = {
   "staticDirs": [
     '../src/assets',
     { from: '../src/assets', to: '/assets-lib' },
+    { from: '../src/assets', to: '/assets/assets-lib' },
   ],
 
   async viteFinal(config, { configType }) {
