@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, getCurrentInstance, onMounted, onUnmounted, PropType, ref } from 'vue';
+import { getAssetUrl } from '../../utils';
 import { useConfig } from '../ConfigProvider';
 
 type CursorState =
@@ -28,11 +29,8 @@ const props = defineProps({
 const {theme} = useConfig();
 const cursorEl = ref<HTMLElement | null>(null);
 const cursorPlaceEl = ref<HTMLElement | null>(null);
-const spriteUrl = computed(() => `url(${resolvedPath(`../../assets/${theme}/cursor.png`)}`);
 
-function resolvedPath(path: string) {
-  return new URL(path, import.meta.url).href
-}
+const spriteUrl = computed(() => getAssetUrl(theme, 'cursor.png'));
 
 function moveCursor(e: MouseEvent) {
   if(!cursorEl.value) return;

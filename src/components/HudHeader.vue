@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import { useElementBounding } from '@vueuse/core';
 import { computed, onMounted, ref } from 'vue';
+import { getAssetPath } from '../utils';
 import Button from './base/Button.vue';
 import { useConfig } from './ConfigProvider';
-
-function resolvedPath(path: string) {
-  return new URL(path, import.meta.url).href
-}
 
 // const props = defineProps({
 // });
@@ -26,7 +23,7 @@ onMounted(() => {
 
 <template>
   <div class="hud-header">
-    <img ref="texEl" class="hud-header__tex" :src="resolvedPath(`../assets/${theme}/hud_header.png`)">
+    <img ref="texEl" class="hud-header__tex" :src="getAssetPath(theme, 'hud_header.png')">
     <div class="hud-header__container">
       <div class="hud-header__actions">
         <Button class="hud-header__btn-action">Задания</Button>

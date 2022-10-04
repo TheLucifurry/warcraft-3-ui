@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { computed, PropType, ref } from 'vue';
+import { getAssetUrl } from '../../utils';
 import { useConfig } from '../ConfigProvider';
-
-function resolvedPath(path: string) {
-  return new URL(path, import.meta.url).href
-}
 
 type Size =
   | 's'
@@ -20,10 +17,10 @@ const props = defineProps({
 const {theme} = useConfig();
 
 const texList = computed(()=>({
-  default: `url(${resolvedPath(`../../assets/${theme}/btn_default.png`)})`,
-  hoverBg: `url(${resolvedPath(`../../assets/${theme}/btn_hover_bg.png`)})`,
-  pressed: `url(${resolvedPath(`../../assets/${theme}/btn_pressed.png`)})`,
-  disabled: `url(${resolvedPath(`../../assets/${theme}/btn_disabled.png`)})`,
+  default: getAssetUrl(theme, 'btn_default.png'),
+  hoverBg: getAssetUrl(theme, 'btn_hover_bg.png'),
+  pressed: getAssetUrl(theme, 'btn_pressed.png'),
+  disabled: getAssetUrl(theme, 'btn_disabled.png'),
 }))
 
 const isDisabled = ref(false);

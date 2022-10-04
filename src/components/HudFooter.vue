@@ -2,10 +2,7 @@
 import { computed, onMounted, ref } from 'vue';
 import { useConfig } from './ConfigProvider';
 import { useElementBounding } from '@vueuse/core'
-
-function resolvedPath(path: string) {
-  return new URL(path, import.meta.url).href
-}
+import { getAssetPath } from '../utils';
 
 const props = defineProps({
   inventory: {
@@ -24,13 +21,14 @@ const heightPx = computed(()=>`${height.value}px`);
 onMounted(() => {
 
 })
+
 </script>
 
 <template>
   <div class="hud-footer">
-    <img ref="texEl" class="hud-footer__tex" :src="resolvedPath(`../assets/${theme}/hud_footer.png`)">
+    <img ref="texEl" class="hud-footer__tex" :src="getAssetPath(theme, 'hud_footer.png')">
     <div class="hud-footer__inventory" :class="{'hud-footer--disabled': !isInventoryAvailable}">
-      <img class="hud-footer__inventory-mock-tex" :src="resolvedPath(`../assets/${theme}/hud_inventory_mock.png`)">
+      <img class="hud-footer__inventory-mock-tex" :src="getAssetPath(theme, 'hud_inventory_mock.png')">
     </div>
   </div>
 </template>
