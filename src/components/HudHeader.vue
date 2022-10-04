@@ -23,7 +23,7 @@ onMounted(() => {
 
 <template>
   <div class="hud-header">
-    <img ref="texEl" class="hud-header__tex" :src="getAssetPath(theme, 'hud_header.png')">
+    <img ref="texEl" class="hud-header__tex" :src="getAssetPath('hud_header.png', theme)">
     <div class="hud-header__container">
       <div class="hud-header__actions">
         <Button class="hud-header__btn-action">Задания</Button>

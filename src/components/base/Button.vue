@@ -17,10 +17,10 @@ const props = defineProps({
 const {theme} = useConfig();
 
 const texList = computed(()=>({
-  default: getAssetUrl(theme, 'btn_default.png'),
-  hoverBg: getAssetUrl(theme, 'btn_hover_bg.png'),
-  pressed: getAssetUrl(theme, 'btn_pressed.png'),
-  disabled: getAssetUrl(theme, 'btn_disabled.png'),
+  default: getAssetUrl('btn_default.png', theme),
+  hoverBg: getAssetUrl('btn_hover_bg.png', theme),
+  pressed: getAssetUrl('btn_pressed.png', theme),
+  disabled: getAssetUrl('btn_disabled.png', theme),
 }))
 
 const isDisabled = ref(false);

@@ -32,11 +32,11 @@ const inv = computed((): Required<IPropInventory> =>{
 
 <template>
   <div class="hud-footer">
-    <img ref="texEl" class="hud-footer__tex" :src="getAssetPath(theme, 'hud_footer.png')">
+    <img ref="texEl" class="hud-footer__tex" :src="getAssetPath('hud_footer.png', theme)">
     <div class="hud-footer__inv">
       <img
         v-visible="!inv.slots"
-        class="hud-footer__inv-mock-tex" :src="getAssetPath(theme, 'hud_inv_mock.png')"
+        class="hud-footer__inv-mock-tex" :src="getAssetPath('hud_inv_mock.png', theme)"
       >
       <div
         v-if="!!inv.slots"
@@ -49,7 +49,7 @@ const inv = computed((): Required<IPropInventory> =>{
         >
           <img
             v-show="ix >= inv.slots"
-            :src="getAssetPath(theme, 'hud_inv_mock_slot.png')"
+            :src="getAssetPath('hud_inv_mock_slot.png', theme)"
           >
         </div>
       </div>

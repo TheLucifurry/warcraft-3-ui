@@ -30,7 +30,7 @@ const {theme} = useConfig();
 const cursorEl = ref<HTMLElement | null>(null);
 const cursorPlaceEl = ref<HTMLElement | null>(null);
 
-const spriteUrl = computed(() => getAssetUrl(theme, 'cursor.png'));
+const spriteUrl = computed(() => getAssetUrl('cursor.png', theme));
 
 function moveCursor(e: MouseEvent) {
   if(!cursorEl.value) return;
