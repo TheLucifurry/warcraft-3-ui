@@ -31,6 +31,17 @@ onMounted(() => {
         <Button class="hud-header__btn-action">Союзники</Button>
         <Button class="hud-header__btn-action">Журнал</Button>
       </div>
+      <div class="hud-header__res">
+        <div class="hud-header__res-item">
+          <img :src="getAssetPath('resource_icons/gold.png')">
+        </div>
+        <div class="hud-header__res-item">
+          <img :src="getAssetPath('resource_icons/lumber.png')">
+        </div>
+        <div class="hud-header__res-item">
+          <img :src="getAssetPath('resource_icons/supply.png')">
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -48,6 +59,7 @@ onMounted(() => {
   &__container {
     width: 100%;
     height: calc(v-bind(heightPx) * 0.5);
+    display: flex;
   }
   &__tex {
     width: 100%;
@@ -65,6 +77,19 @@ onMounted(() => {
     & + & {
       margin-left: 1.2%;
     }
+  }
+  &__res{
+    width: 50%;
+    padding: 0.3% 0 0.5% 14%;
+    display: flex;
+
+    & img {
+      height: 100%;
+    }
+  }
+  &__res-item {
+    height: 100%;
+    width: 25.6%;
   }
 }
 </style>
