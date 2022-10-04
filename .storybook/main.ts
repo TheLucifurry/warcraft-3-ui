@@ -26,15 +26,14 @@ module.exports = {
   ],
 
   async viteFinal(config, { configType }) {
-    if (configType === 'DEVELOPMENT') {
-      config.define['ASSETS_PATH'] = `'./'`;
-    }
     if (configType === 'PRODUCTION') {
       config.base = PATH_BASE;
-      config.define['ASSETS_PATH'] = `'./'`;
     }
 
     return mergeConfig(config, {
+      define: {
+        'ASSETS_PATH': `'./'`
+      },
       optimizeDeps: {
         include: ['storybook-dark-mode'],
       },
