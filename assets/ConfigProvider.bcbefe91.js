@@ -1,2 +1,0 @@
-var i=Object.defineProperty;var o=(e,t)=>i(e,"name",{value:t,configurable:!0});import{d as a,r as u,p as c,i as p}from"./vue.esm-bundler.bca99565.js";var n=(e=>(e.HUMAN="hum",e.NIGHT_ELF="nel",e.ORC="orc",e.UNDEAD="und",e))(n||{});const r="wc3ui-config",h=a({props:{theme:{type:String,default:n.HUMAN}},setup(e,t){const{theme:s}=e;return c(r,{theme:s}),()=>u(t.slots,"default")}});function l(){const{theme:e}=p(r)||{theme:n.HUMAN};return{theme:e}}o(l,"useConfig");export{h as C,n as R,l as u};
-//# sourceMappingURL=ConfigProvider.bcbefe91.js.map
