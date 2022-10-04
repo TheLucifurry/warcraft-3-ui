@@ -11,8 +11,7 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
-    'storybook-dark-mode',
-    'storybook-addon-turbo-build'
+    'storybook-dark-mode'
   ],
   "framework": "@storybook/vue3",
   "core": {
