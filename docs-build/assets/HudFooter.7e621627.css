@@ -1,1 +1,0 @@
-.hud-footer{display:flex;position:relative;background:linear-gradient(rgba(0,0,0,0) 25%,black 25%);width:100%;height:var(--27e1616d)}.hud-footer>*{position:absolute}.hud-footer__tex{width:100%}.hud-footer__inventory{height:100%;left:59%}.hud-footer__inventory:not(.hud-footer--disabled) .hud-footer__inventory-mock-tex{display:none}.hud-footer__inventory-mock-tex{height:100%}
