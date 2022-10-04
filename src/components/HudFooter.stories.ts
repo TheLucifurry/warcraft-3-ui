@@ -1,16 +1,24 @@
 import HudFooter from './HudFooter.vue';
+import { unflatten } from 'flat';
 import ConfigProvider from './ConfigProvider';
 import { RACE_KEY } from '../consts';
 
 export default {
   title: 'Combined/HudFooter',
   component: HudFooter,
+  argTypes: {
+    'inventory.slots': {
+      control: { type: 'range', min: 0, max: 6 },
+    },
+  }
 };
 
 const Template = (args: any) => ({
   components: { HudFooter, ConfigProvider },
   setup() {
-    return { args };
+    return {
+      args: unflatten(args, '.')
+    };
   },
   template: `
     <ConfigProvider :theme="args.raceTheme">
