@@ -1,6 +1,6 @@
 const { mergeConfig } = require('vite');
 
-const PATH_BASE = '/__warcraft-3-ui__/';
+const PATH_BASE = '/warcraft-3-ui/';
 
 module.exports = {
   "stories": [
@@ -21,7 +21,9 @@ module.exports = {
   "features": {
     "storyStoreV7": true
   },
-  "staticDirs": ['../src/assets'],
+  "staticDirs": [
+    { from: '../src/assets', to: '/assets-lib' }
+  ],
 
   async viteFinal(config, { configType }) {
     if (configType === 'DEVELOPMENT') {
@@ -29,7 +31,7 @@ module.exports = {
     }
     if (configType === 'PRODUCTION') {
       config.base = PATH_BASE;
-      config.define['ASSETS_PATH'] = `'.${PATH_BASE}'`;
+      config.define['ASSETS_PATH'] = `'./assets-lib/'`;
     }
 
     return mergeConfig(config, {
