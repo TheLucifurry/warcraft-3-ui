@@ -22,7 +22,8 @@ module.exports = {
     "storyStoreV7": true
   },
   "staticDirs": [
-    { from: '../src/assets', to: '/assets-lib' }
+    '../src/assets',
+    { from: '../src/assets', to: '/assets-lib' },
   ],
 
   async viteFinal(config, { configType }) {
