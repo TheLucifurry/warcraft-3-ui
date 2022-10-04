@@ -27,7 +27,7 @@ module.exports = {
       config.define['ASSETS_PATH'] = `'./'`;
     }
     if (configType === 'PRODUCTION') {
-      config.base = PATH_BASE;
+      // config.base = PATH_BASE;
       config.define['ASSETS_PATH'] = `'.${PATH_BASE}'`;
     }
 
