@@ -22,8 +22,7 @@ module.exports = {
   },
   "staticDirs": [
     '../src/assets',
-    { from: '../src/assets', to: '/assets-lib' },
-    { from: '../src/assets', to: '/assets/assets-lib' },
+    { from: '../src/assets', to: '/assets' },
   ],
 
   async viteFinal(config, { configType }) {
@@ -32,7 +31,7 @@ module.exports = {
     }
     if (configType === 'PRODUCTION') {
       config.base = PATH_BASE;
-      config.define['ASSETS_PATH'] = `'./assets-lib/'`;
+      config.define['ASSETS_PATH'] = `'./'`;
     }
 
     return mergeConfig(config, {
