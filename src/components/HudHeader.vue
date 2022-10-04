@@ -80,8 +80,9 @@ onMounted(() => {
   }
   &__res{
     width: 50%;
-    padding: 0.3% 0 0.5% 14%;
     display: flex;
+    padding: 0.3% 0 0.5% 7.6%;
+    box-sizing: border-box;
 
     & img {
       height: 100%;
