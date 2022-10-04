@@ -1,6 +1,6 @@
 const { mergeConfig } = require('vite');
 
-const PATH_BASE = '/warcraft-3-ui/';
+const PATH_BASE = '/__warcraft-3-ui__/';
 
 module.exports = {
   "stories": [
