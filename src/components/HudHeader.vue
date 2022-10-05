@@ -28,7 +28,7 @@ onMounted(() => {
       <div class="hud-header__actions">
         <Button class="hud-header__btn-action">Задания</Button>
         <Button class="hud-header__btn-action">Меню</Button>
-        <Button class="hud-header__btn-action">Союзники</Button>
+        <Button class="hud-header__btn-action" disabled>Союзники</Button>
         <Button class="hud-header__btn-action">Журнал</Button>
       </div>
       <div class="hud-header__res">

@@ -20,7 +20,11 @@ const Template = (args) => ({
   },
   template: `
     <ConfigProvider :theme="args.raceTheme">
-      <Button v-bind="args"> Button </Button>
+      <div style="width: 300px; height: 130px; display: flex; flex-direction: column; justify-content: space-between;">
+        <Button v-bind="args" style="height: 24px; width: 100px"> Button </Button>
+        <Button v-bind="args" size="s" style="width: 150px"> Button </Button>
+        <Button v-bind="args" size="m"> Button </Button>
+      </div>
     </ConfigProvider>`,
 });
 

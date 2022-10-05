@@ -1,16 +1,25 @@
 <script setup lang="ts">
-import { computed, PropType, ref } from 'vue';
+import { computed, PropType } from 'vue';
 import { getAssetUrl } from '../../utils';
 import { useConfig } from '../ConfigProvider';
 
 type Size =
+  | 'd'
   | 's'
   | 'm'
 
 const props = defineProps({
   size: {
     type: String as PropType<Size>,
-    default: () => '',
+    default: () => 'd',
+  },
+  disabled: {
+    type: Boolean,
+    default: () => false,
+  },
+  captionColor: {
+    type: String,
+    default: () => '#f8f8f7',
   }
 });
 
@@ -22,30 +31,44 @@ const texList = computed(()=>({
   pressed: getAssetUrl('btn_pressed.png', theme),
   disabled: getAssetUrl('btn_disabled.png', theme),
 }))
-
-const isDisabled = ref(false);
 </script>
 
 <template>
-  <button :class="`btn btn--${props.size}`"  :disabled="isDisabled">
-    <slot></slot>
-  </button>
+  <label>
+    <input type="button" hidden :disabled="props.disabled">
+    <div :class="`btn btn--${props.size}`">
+      <span class="btn__capt">
+        <slot></slot>
+      </span>
+    </div>
+  </label>
 </template>
 
 <style lang="scss">
-$clip-pad: 6px;
-
 .btn {
+  width: 100%;
+  height: 100%;
   position: relative;
-  // width: 320px;
-  // padding: 16px 64px;
   background: v-bind('texList.default') no-repeat;
   background-size: 100% 100%;
-  border: 0;
-  color: gold;
+  color: v-bind('props.captionColor');
+  user-select: none;
   -webkit-mask-image: v-bind('texList.default');
   -webkit-mask-size: 100% 100%;
 
+  &__capt {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    bottom: 0px;
+  }
+
+  // Sizes
+  &--d {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 180%;
+  }
   &--s {
     height: 32px;
     line-height: 32px;
@@ -57,7 +80,7 @@ $clip-pad: 6px;
     min-width: 200px;
   }
 
-  &:hover::before {
+  *:not([disabled]) + &:hover::before {
     content: "";
     position: absolute;
     width: 100%;
@@ -68,11 +91,18 @@ $clip-pad: 6px;
     top: 0;
     mix-blend-mode: screen;
   }
-  &:active {
+  *:not([disabled]) + &:active {
     background-image: v-bind('texList.pressed');
+
+    & .btn__capt {
+      left: 3px;
+      bottom: -2px;
+    }
   }
-  &[disabled] {
+  [disabled] + & {
     background-image: v-bind('texList.disabled');
+    pointer-events: all !important;
+    color: #646464;
   }
 }
 </style>
