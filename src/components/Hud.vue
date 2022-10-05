@@ -8,8 +8,8 @@ const time = useTime();
 
 // TODO: Change this Dev-only feature
 setInterval(()=>{
-  time.add(1);
-}, 1000/6)
+  time.add(1/60);
+}, 1000/60)
 </script>
 
 <template>

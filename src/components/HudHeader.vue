@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useElementBounding } from '@vueuse/core';
-import { computed, onMounted, PropType, ref } from 'vue';
-import { IUseTime } from '../composables/useTime';
+import { computed, PropType, ref } from 'vue';
+import { IUseTime, useTime } from '../composables/useTime';
 import { getAssetPath, getAssetUrl } from '../utils';
 import Button from './base/Button.vue';
 import { useConfig } from './ConfigProvider';
@@ -16,23 +16,21 @@ const texEl = ref(null)
 
 const {theme} = useConfig();
 const {height} = useElementBounding(texEl);
+const time = props.time ?? useTime()
 
 const heightPx = computed(()=>`${height.value}px`);
 const timeIndTex = computed(() => getAssetUrl('hud_time_indicator.png'));
-const timeIndTexPosition = computed(() => {
-  if (!props.time) return '0%';
-  return `${props.time.getProgress() * 2 * 100}%`
-})
-
-onMounted(() => {
-
-})
+const timeIndTexPosition = computed(() => `${time.getProgress() * 2 * 100}%`);
+const timeIndDotsCount = computed(() => Math.trunc(time.getProgress(true) * 8) + 1);
 </script>
 
 <template>
   <div class="hud-header">
-    <div class="hud-header__under-text-container">
+    <div class="hud-header__under-tex-container">
       <div class="hud-header__time"></div>
+      <div class="hud-header__time-dots" :class="{'hud-header--day': time.isDay.value}">
+        <div v-for="(i, ix) in timeIndDotsCount" :key="ix" />
+      </div>
     </div>
     <img ref="texEl" class="hud-header__tex" :src="getAssetPath('hud_header.png', theme)">
     <div class="hud-header__container">
@@ -73,19 +71,46 @@ onMounted(() => {
     position: absolute;
   }
 
-  &__under-text-container {
+  &__under-tex-container {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  &__time {
-    height: calc(v-bind(heightPx) * 0.6);
-    width: calc(v-bind(heightPx) * 0.6);
-    background: v-bind(timeIndTex);
-    background-size: cover;
-    background-position-x: v-bind(timeIndTexPosition);
+
+    & .hud-header__time {
+      height: calc(v-bind(heightPx) * 0.6);
+      width: calc(v-bind(heightPx) * 0.6);
+      background: v-bind(timeIndTex);
+      background-size: cover;
+      background-position-x: v-bind(timeIndTexPosition);
+      border-radius: 50%;
+    }
+    & .hud-header__time-dots {
+      position: absolute;
+      transform: translateY(-3%) scaleY(0.95);
+
+      &.hud-header--day > * {
+        background: yellow;
+      }
+      & > * {
+        --dot-size: calc(v-bind(heightPx) * 0.15);
+
+        position: absolute;
+        top: calc(50% - (var(--dot-size) / 2));
+        left: calc(50% - (var(--dot-size) / 2));
+        width: var(--dot-size);
+        height: var(--dot-size);
+        background: cyan;
+        border-radius: 50%;
+
+        @for $i from 0 through 7 {
+          &:nth-child(#{$i + 1}) {
+            transform: rotate($i * 45deg - 90deg) translate(calc(v-bind(heightPx) * 0.4)) rotate($i * -45deg - 90deg);
+          }
+        }
+      }
+    }
   }
   &__tex {
     width: 100%;
