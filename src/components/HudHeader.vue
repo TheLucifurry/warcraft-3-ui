@@ -41,6 +41,11 @@ onMounted(() => {
         <div class="hud-header__res-item">
           <img :src="getAssetPath('resource_icons/supply.png')">
         </div>
+        <div class="hud-header__res-item hud-header__res-item-supply-info">
+          <span>
+            Нет расходов
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -81,8 +86,9 @@ onMounted(() => {
   &__res{
     width: 50%;
     display: flex;
-    padding: 0.3% 0 0.5% 7.6%;
+    padding: 0.3% 0.3% 0.5% 7.5%;
     box-sizing: border-box;
+    justify-content: space-between;
 
     & img {
       height: 100%;
@@ -90,7 +96,13 @@ onMounted(() => {
   }
   &__res-item {
     height: 100%;
-    width: 25.6%;
+    width: 23%;
+  }
+  &__res-item-supply-info {
+    color: #00f000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 </style>
