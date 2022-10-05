@@ -2,13 +2,20 @@
 import HudHeader from './HudHeader.vue';
 import HudFooter from './HudFooter.vue';
 import Cursor from './base/Cursor.vue';
+import { useTime } from '../composables/useTime';
 
+const time = useTime();
+
+// TODO: Change this Dev-only feature
+setInterval(()=>{
+  time.add(1);
+}, 1000/6)
 </script>
 
 <template>
   <div class="hud">
     <Cursor/>
-    <HudHeader/>
+    <HudHeader :time="time"/>
     <HudFooter/>
   </div>
 </template>

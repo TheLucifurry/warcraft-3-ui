@@ -1,20 +1,28 @@
 <script setup lang="ts">
 import { useElementBounding } from '@vueuse/core';
-import { computed, onMounted, ref } from 'vue';
-import { getAssetPath } from '../utils';
+import { computed, onMounted, PropType, ref } from 'vue';
+import { IUseTime } from '../composables/useTime';
+import { getAssetPath, getAssetUrl } from '../utils';
 import Button from './base/Button.vue';
 import { useConfig } from './ConfigProvider';
 
-// const props = defineProps({
-// });
+const props = defineProps({
+  time: {
+    type: Object as PropType<IUseTime>,
+  }
+});
 
 const texEl = ref(null)
 
 const {theme} = useConfig();
-const { height } = useElementBounding(texEl);
-
+const {height} = useElementBounding(texEl);
 
 const heightPx = computed(()=>`${height.value}px`);
+const timeIndTex = computed(() => getAssetUrl('hud_time_indicator.png'));
+const timeIndTexPosition = computed(() => {
+  if (!props.time) return '0%';
+  return `${props.time.getProgress() * 2 * 100}%`
+})
 
 onMounted(() => {
 
@@ -23,6 +31,9 @@ onMounted(() => {
 
 <template>
   <div class="hud-header">
+    <div class="hud-header__under-text-container">
+      <div class="hud-header__time"></div>
+    </div>
     <img ref="texEl" class="hud-header__tex" :src="getAssetPath('hud_header.png', theme)">
     <div class="hud-header__container">
       <div class="hud-header__actions">
@@ -56,18 +67,33 @@ onMounted(() => {
   display: flex;
   position: relative;
   width: 100%;
+  height: v-bind(heightPx);
 
   & > * {
     position: absolute;
   }
 
-  &__container {
+  &__under-text-container {
     width: 100%;
-    height: calc(v-bind(heightPx) * 0.5);
+    height: 100%;
     display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__time {
+    height: calc(v-bind(heightPx) * 0.6);
+    width: calc(v-bind(heightPx) * 0.6);
+    background: v-bind(timeIndTex);
+    background-size: cover;
+    background-position-x: v-bind(timeIndTexPosition);
   }
   &__tex {
     width: 100%;
+  }
+  &__container {
+    width: 100%;
+    height: 50%;
+    display: flex;
   }
   &__actions {
     width: 50%;
