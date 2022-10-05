@@ -1,6 +1,9 @@
+export { RACE_KEY } from './consts';
+
 export { vVisible } from './components/directives';
 
 export { useTime } from './composables/useTime';
+export type { IUseTime } from './composables/useTime';
 
 export { default as ConfigProvider } from './components/ConfigProvider';
 
